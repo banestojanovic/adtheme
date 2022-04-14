@@ -83,14 +83,6 @@ Thumbs.db
 # add your own entries here
 
 # track themes
-wp-content/themes/lisfinity/node_modules
-wp-content/themes/lisfinity/wpcs
-wp-content/themes/lisfinity/vendor/*
-wp-content/themes/lisfinity/bin/*
+!wp-content/themes/adtheme
 
 # track plugins
-#lisfinity core plugin
-wp-content/plugins/lisfinity-core/node_modules
-wp-content/plugins/lisfinity-core/wpcs
-wp-content/plugins/lisfinity-core/vendor/*
-wp-content/plugins/lisfinity-core/bin/*
