@@ -86,3 +86,5 @@ Thumbs.db
 !wp-content/themes/adtheme
 
 # track plugins
+!wp-content/plugins/adtheme-core
+wp-content/plugins/adtheme-core/node_modules
