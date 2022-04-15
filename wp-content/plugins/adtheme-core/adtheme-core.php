@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: WP Emerge Starter Plugin
+ * Plugin Name: AdTheme Core
  * Plugin URI: https://wpemerge.com/
  * Description:
- * Version: 0.15.0
+ * Version: 2.0.0
  * Requires at least: 4.7
  * Requires PHP: 5.5.9
  * Author: Atanas Angelov

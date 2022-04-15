@@ -1,3 +1,4 @@
 <?php
 
-require get_parent_theme_file_path( 'vendor/autoload.php' );
+add_theme_support( 'menus' );
+add_theme_support( 'widgets' );

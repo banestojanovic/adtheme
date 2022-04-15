@@ -1,7 +1,6 @@
-<?php
-get_header();
-the_post();
-?>
-<h1><?php the_title(); ?></h1>
+<?php get_header(); ?>
+
+<h1>Ovo je page.php template</h1>
+<?php the_title(); ?>
 
 <?php get_footer(); ?>
