@@ -31,37 +31,52 @@ class ContentTypesServiceProvider implements ServiceProviderInterface
 	 */
 	public function registerPostTypes() {
 		// phpcs:disable
-		/*
-		register_post_type(
-			'my_app_custom_post_type',
-			array(
-				'labels'              => array(
-					'name'               => __( 'Custom Types', 'my_app' ),
-					'singular_name'      => __( 'Custom Type', 'my_app' ),
-					'add_new'            => __( 'Add New', 'my_app' ),
-					'add_new_item'       => __( 'Add new Custom Type', 'my_app' ),
-					'view_item'          => __( 'View Custom Type', 'my_app' ),
-					'edit_item'          => __( 'Edit Custom Type', 'my_app' ),
-					'new_item'           => __( 'New Custom Type', 'my_app' ),
-					'search_items'       => __( 'Search Custom Types', 'my_app' ),
-					'not_found'          => __( 'No custom types found', 'my_app' ),
-					'not_found_in_trash' => __( 'No custom types found in trash', 'my_app' ),
-				),
-				'public'              => true,
-				'exclude_from_search' => false,
-				'show_ui'             => true,
-				'capability_type'     => 'post',
-				'hierarchical'        => false,
-				'query_var'           => true,
-				'menu_icon'           => 'dashicons-admin-post',
-				'supports'            => array( 'title', 'editor', 'page-attributes' ),
-				'rewrite'             => array(
-					'slug'       => 'custom-post-type',
-					'with_front' => false,
-				),
-			)
+		$labels = [
+			'name'                  => _x( 'Ads', 'Post type general name', 'adtheme-core' ),
+			'singular_name'         => _x( 'Ad', 'Post type singular name', 'adtheme-core' ),
+			'menu_name'             => _x( 'Ads', 'Admin Menu text', 'adtheme-core' ),
+			'name_admin_bar'        => _x( 'Ad', 'Add New on Toolbar', 'adtheme-core' ),
+			'add_new'               => __( 'Add New', 'adtheme-core' ),
+			'add_new_item'          => __( 'Add New Ad', 'adtheme-core' ),
+			'new_item'              => __( 'New Ad', 'adtheme-core' ),
+			'edit_item'             => __( 'Edit Ad', 'adtheme-core' ),
+			'view_item'             => __( 'View Ad', 'adtheme-core' ),
+			'all_items'             => __( 'All Ads', 'adtheme-core' ),
+			'search_items'          => __( 'Search Ads', 'adtheme-core' ),
+			'parent_item_colon'     => __( 'Parent Ads:', 'adtheme-core' ),
+			'not_found'             => __( 'No ads found.', 'adtheme-core' ),
+			'not_found_in_trash'    => __( 'No ads found in Trash.', 'adtheme-core' ),
+			'featured_image'        => _x( 'Ad Cover Image', 'Overrides the "Featured Image" phrase for this post type. Added in 4.3', 'adtheme-core' ),
+			'set_featured_image'    => _x( 'Set cover image', 'Overrides the "Set featured image" phrase for this post type. Added in 4.3', 'adtheme-core' ),
+			'remove_featured_image' => _x( 'Remove cover image', 'Overrides the "Remove featured image" phrase for this post type. Added in 4.3', 'adtheme-core' ),
+			'use_featured_image'    => _x( 'Use as cover image', 'Overrides the "Use as featured image" phrase for this post type. Added in 4.3', 'adtheme-core' ),
+			'archives'              => _x( 'Ad archives', 'The post type archive label used in nav menus. Default "Post Archives". Added in 4.4', 'adtheme-core' ),
+			'insert_into_item'      => _x( 'Insert into book', 'Overrides the "Insert into post"/"Insert into page" phrase (used when inserting media into a post). Added in 4.4', 'adtheme-core' ),
+			'uploaded_to_this_item' => _x( 'Uploaded to this book', 'Overrides the "Uploaded to this post"/"Uploaded to this page" phrase (used when viewing media attached to a post). Added in 4.4', 'adtheme-core' ),
+			'filter_items_list'     => _x( 'Filter ads list', 'Screen reader text for the filter links heading on the post type listing screen. Default "Filter posts list"/"Filter pages list". Added in 4.4', 'adtheme-core' ),
+			'items_list_navigation' => _x( 'Ads list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default "Posts list navigation"/"Pages list navigation". Added in 4.4', 'adtheme-core' ),
+			'items_list'            => _x( 'Ads list', 'Screen reader text for the items list heading on the post type listing screen. Default "Posts list"/"Pages list". Added in 4.4', 'adtheme-core' ),
+		];
+
+		$labels = apply_filters( 'adtheme_ad_post_type_labels', $labels );
+
+		$args = array(
+			'labels'             => $labels,
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => carbon_get_theme_option( 'ad-slug' ) ),
+			'capability_type'    => 'post',
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => null,
+			'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'comments' ],
 		);
-		*/
+
+		$args = apply_filters( 'adtheme_ad_post_type_args', $args );
+		register_post_type( 'ad', $args );
 		// phpcs:enable
 	}
 

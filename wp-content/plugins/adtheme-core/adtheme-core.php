@@ -10,7 +10,7 @@
  * Author URI: https://atanas.dev/
  * License: GPL-2.0-only
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: my_app
+ * Text Domain: adtheme-core
  * Domain Path: /languages
  *
  * YOU SHOULD NORMALLY NOT NEED TO ADD ANYTHING HERE - any custom functionality unrelated

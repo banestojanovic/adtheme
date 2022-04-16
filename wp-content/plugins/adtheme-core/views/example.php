@@ -9,5 +9,5 @@
 
 ?>
 <div class="my_app__view">
-	<?php \MyApp::render( 'partials/example', [ 'message' => __( 'Hello World!', 'my_app' ) ] ); ?>
+	<?php \MyApp::render( 'partials/example', [ 'message' => __( 'Hello World!', 'adtheme-core' ) ] ); ?>
 </div>

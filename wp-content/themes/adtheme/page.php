@@ -1,6 +1,11 @@
 <?php get_header(); ?>
 
-<h1>Ovo je page.php template</h1>
 <?php the_title(); ?>
+
+<?php the_content(); ?>
+
+<?php $post = get_post( 17 ); ?>
+<?php dump( $post );?>
+
 
 <?php get_footer(); ?>

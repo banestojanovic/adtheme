@@ -51,7 +51,7 @@ if ( ! function_exists( 'my_app_should_load_wpemerge' ) ) {
 			'admin_notices',
 			function () use ( $name, $min, $max, $loaded ) {
 				// Translators: %1$s = plugin or theme name; %2$s = minimum version number; %3$s = maximum version number; %4$s plugin or theme name; %5$s loaded version number.
-				$message = __( '%1$s requires WP Emerge version >= %2$s and < %3$s but %4$s has already loaded version %5$s.', 'my_app' );
+				$message = __( '%1$s requires WP Emerge version >= %2$s and < %3$s but %4$s has already loaded version %5$s.', 'adtheme-core' );
 				?>
 				<div class="notice notice-error">
 					<p><strong><?php echo esc_html( $name ); ?></strong></p>

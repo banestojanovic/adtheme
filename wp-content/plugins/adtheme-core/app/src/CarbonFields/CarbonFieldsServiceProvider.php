@@ -21,10 +21,10 @@ class CarbonFieldsServiceProvider implements ServiceProviderInterface {
 	 * {@inheritDoc}
 	 */
 	public function bootstrap( $container ) {
-		add_action( 'after_setup_theme', [$this, 'bootstrapCarbonFields'], 100 );
-		add_filter( 'carbon_fields_map_field_api_key', [$this, 'filterCarbonFieldsGoogleMapsKey'] );
-		add_action( 'carbon_fields_register_fields', [$this, 'registerFields'] );
-		add_action( 'widgets_init', [$this, 'registerWidgets'] );
+		add_action( 'after_setup_theme', [ $this, 'bootstrapCarbonFields' ], 100 );
+		add_filter( 'carbon_fields_map_field_api_key', [ $this, 'filterCarbonFieldsGoogleMapsKey' ] );
+		add_action( 'carbon_fields_register_fields', [ $this, 'registerFields' ] );
+		add_action( 'widgets_init', [ $this, 'registerWidgets' ] );
 	}
 
 	/**
@@ -55,6 +55,17 @@ class CarbonFieldsServiceProvider implements ServiceProviderInterface {
 		$this->registerPostMeta();
 		$this->registerTermMeta();
 		$this->registerUserMeta();
+
+		// ad post meta.
+		$this->registerAdMeta();
+	}
+
+	protected function registerAdMeta() {
+		Container::make( 'post_meta', __( 'Ad Information', 'adtheme-core' ) )
+		         ->where( 'post_type', '=', 'ad' )
+		         ->add_fields( [
+					 Field::make( 'text', 'ad-subtitle', esc_html__( 'Ad Subtitle', 'adtheme-core' ) )
+		         ] );
 	}
 
 	/**
@@ -63,13 +74,12 @@ class CarbonFieldsServiceProvider implements ServiceProviderInterface {
 	 * @return void
 	 */
 	protected function registerThemeOptions() {
-		Container::make( 'theme_options', __( 'Theme Options', 'my_app' ) )
-			->set_page_file( 'my_app-theme-options.php' )
-			->add_fields( array(
-				Field::make( 'text', 'crb_google_maps_api_key', __( 'Google Maps API Key', 'my_app' ) ),
-				Field::make( 'header_scripts', 'crb_header_script', __( 'Header Script', 'my_app' ) ),
-				Field::make( 'footer_scripts', 'crb_footer_script', __( 'Footer Script', 'my_app' ) ),
-			) );
+		Container::make( 'theme_options', __( 'Theme Options', 'adtheme-core' ) )
+		         ->set_page_file( 'my_app-theme-options.php' )
+		         ->add_fields( array(
+			         Field::make( 'text', 'ad-slug', __( 'Ad Slug', 'adtheme-core' ) )
+			         ->set_default_value( 'ad' ),
+		         ) );
 	}
 
 	/**
@@ -78,19 +88,9 @@ class CarbonFieldsServiceProvider implements ServiceProviderInterface {
 	 * @return void
 	 */
 	protected function registerPostMeta() {
-		Container::make( 'post_meta', __( 'Custom Data', 'my_app' ) )
-			->where( 'post_type', '=', 'page' )
-			->add_fields( array(
-				Field::make( 'complex', 'crb_my_data' )
-					->add_fields( array(
-						Field::make( 'text', 'title' )
-							->help_text( 'lorem' ),
-					) ),
-				Field::make( 'map', 'crb_location' )
-					->set_position( 37.423156, -122.084917, 14 ),
-				Field::make( 'image', 'crb_img' ),
-				Field::make( 'file', 'crb_pdf' ),
-			));
+		Container::make( 'post_meta', __( 'Custom Data', 'adtheme-core' ) )
+		         ->where( 'post_type', '=', 'page' )
+		         ->add_fields( array() );
 	}
 
 	/**
