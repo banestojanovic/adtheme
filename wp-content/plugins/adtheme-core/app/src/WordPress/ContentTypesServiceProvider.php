@@ -7,8 +7,7 @@ use WPEmerge\ServiceProviders\ServiceProviderInterface;
 /**
  * Register widgets and sidebars.
  */
-class ContentTypesServiceProvider implements ServiceProviderInterface
-{
+class ContentTypesServiceProvider implements ServiceProviderInterface {
 	/**
 	 * {@inheritDoc}
 	 */
@@ -20,8 +19,8 @@ class ContentTypesServiceProvider implements ServiceProviderInterface
 	 * {@inheritDoc}
 	 */
 	public function bootstrap( $container ) {
-		add_action( 'init', [$this, 'registerPostTypes'] );
-		add_action( 'init', [$this, 'registerTaxonomies'] );
+		add_action( 'init', [ $this, 'registerPostTypes' ] );
+		add_action( 'init', [ $this, 'registerTaxonomies' ] );
 	}
 
 	/**
@@ -67,7 +66,7 @@ class ContentTypesServiceProvider implements ServiceProviderInterface
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => carbon_get_theme_option( 'ad-slug' ) ),
+			'rewrite'            => [ 'slug' => carbon_get_theme_option( 'ad-slug' ) ],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
@@ -87,33 +86,63 @@ class ContentTypesServiceProvider implements ServiceProviderInterface
 	 */
 	public function registerTaxonomies() {
 		// phpcs:disable
-		/*
-		register_taxonomy(
-			'my_app_custom_taxonomy',
-			array( 'post_type' ),
-			array(
-				'labels'            => array(
-					'name'              => __( 'Custom Taxonomies', 'my_app' ),
-					'singular_name'     => __( 'Custom Taxonomy', 'my_app' ),
-					'search_items'      => __( 'Search Custom Taxonomies', 'my_app' ),
-					'all_items'         => __( 'All Custom Taxonomies', 'my_app' ),
-					'parent_item'       => __( 'Parent Custom Taxonomy', 'my_app' ),
-					'parent_item_colon' => __( 'Parent Custom Taxonomy:', 'my_app' ),
-					'view_item'         => __( 'View Custom Taxonomy', 'my_app' ),
-					'edit_item'         => __( 'Edit Custom Taxonomy', 'my_app' ),
-					'update_item'       => __( 'Update Custom Taxonomy', 'my_app' ),
-					'add_new_item'      => __( 'Add New Custom Taxonomy', 'my_app' ),
-					'new_item_name'     => __( 'New Custom Taxonomy Name', 'my_app' ),
-					'menu_name'         => __( 'Custom Taxonomies', 'my_app' ),
-				),
-				'hierarchical'      => true,
-				'show_ui'           => true,
-				'show_admin_column' => true,
-				'query_var'         => true,
-				'rewrite'           => array( 'slug' => 'custom-taxonomy' ),
-			)
-		);
-		*/
+		$labels = [
+			'name'              => _x( 'Category', 'taxonomy general name', 'textdomain' ),
+			'singular_name'     => _x( 'Category', 'taxonomy singular name', 'textdomain' ),
+			'search_items'      => __( 'Search Category', 'textdomain' ),
+			'all_items'         => __( 'All Category', 'textdomain' ),
+			'parent_item'       => __( 'Parent Category', 'textdomain' ),
+			'parent_item_colon' => __( 'Parent Category:', 'textdomain' ),
+			'edit_item'         => __( 'Edit Category', 'textdomain' ),
+			'update_item'       => __( 'Update Category', 'textdomain' ),
+			'add_new_item'      => __( 'Add New Category', 'textdomain' ),
+			'new_item_name'     => __( 'New Category Name', 'textdomain' ),
+			'menu_name'         => __( 'Category', 'textdomain' ),
+		];
+
+		$labels = apply_filters( 'adtheme_ad_taxonomy_category_labels', $labels );
+
+		$args = [
+			'hierarchical'      => true,
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => [ 'slug' => carbon_get_theme_option( 'ad-category-slug' ) ],
+		];
+
+		$args = apply_filters( 'adtheme_ad_taxonomy_category_args', $args );
+
+		register_taxonomy( 'ad-category', [ 'ad' ], $args );
+
+		$labels = [
+			'name'              => _x( 'Location', 'taxonomy general name', 'textdomain' ),
+			'singular_name'     => _x( 'Location', 'taxonomy singular name', 'textdomain' ),
+			'search_items'      => __( 'Search Locations', 'textdomain' ),
+			'all_items'         => __( 'All Locations', 'textdomain' ),
+			'parent_item'       => __( 'Parent Location', 'textdomain' ),
+			'parent_item_colon' => __( 'Parent Location:', 'textdomain' ),
+			'edit_item'         => __( 'Edit Location', 'textdomain' ),
+			'update_item'       => __( 'Update Location', 'textdomain' ),
+			'add_new_item'      => __( 'Add New Location', 'textdomain' ),
+			'new_item_name'     => __( 'New Location Name', 'textdomain' ),
+			'menu_name'         => __( 'Location', 'textdomain' ),
+		];
+
+		$labels = apply_filters( 'adtheme_ad_location_category_labels', $labels );
+
+		$args = [
+			'hierarchical'      => true,
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => [ 'slug' => 'location' ],
+		];
+
+		$args = apply_filters( 'adtheme_ad_location_category_args', $args );
+
+		register_taxonomy( 'ad-location', [ 'ad' ], $args );
 		// phpcs:enable
 	}
 }

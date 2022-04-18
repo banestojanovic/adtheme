@@ -64,7 +64,7 @@ class CarbonFieldsServiceProvider implements ServiceProviderInterface {
 		Container::make( 'post_meta', __( 'Ad Information', 'adtheme-core' ) )
 		         ->where( 'post_type', '=', 'ad' )
 		         ->add_fields( [
-					 Field::make( 'text', 'ad-subtitle', esc_html__( 'Ad Subtitle', 'adtheme-core' ) )
+			         Field::make( 'text', 'ad-subtitle', esc_html__( 'Ad Subtitle', 'adtheme-core' ) )
 		         ] );
 	}
 
@@ -78,7 +78,9 @@ class CarbonFieldsServiceProvider implements ServiceProviderInterface {
 		         ->set_page_file( 'my_app-theme-options.php' )
 		         ->add_fields( array(
 			         Field::make( 'text', 'ad-slug', __( 'Ad Slug', 'adtheme-core' ) )
-			         ->set_default_value( 'ad' ),
+			              ->set_default_value( 'ad' ),
+			         Field::make( 'text', 'ad-category-slug', __( 'Ad Category Slug', 'adtheme-core' ) )
+			              ->set_default_value( 'ad-category' ),
 		         ) );
 	}
 
@@ -99,13 +101,12 @@ class CarbonFieldsServiceProvider implements ServiceProviderInterface {
 	 * @return void
 	 */
 	protected function registerTermMeta() {
-		/*
-		Container::make( 'term_meta', __( 'Custom Data', 'my_app' ) )
-			->where( 'term_taxonomy', '=', 'category' )
-			->add_fields( array(
-				Field::make( 'image', 'crb_img' ),
-			));
-		*/
+		Container::make( 'term_meta', __( 'Custom Data', 'adtheme-core' ) )
+		         ->where( 'term_taxonomy', '=', 'ad-category' )
+		         ->add_fields( array(
+			         Field::make( 'text', 'term-subtitle', __( 'Term Subtitle', 'adtheme-core' ) ),
+			         Field::make( 'image', 'ad-category-image', __( 'Ad Category Image', 'adtheme-core' ) ),
+		         ) );
 	}
 
 	/**
