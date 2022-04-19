@@ -27,6 +27,8 @@ return [
 		\MyApp\WordPress\PluginServiceProvider::class,
 		\MyApp\WordPress\WidgetsServiceProvider::class,
 		\MyApp\CarbonFields\CarbonFieldsServiceProvider::class,
+		// Shortcodes.
+		\MyApp\Shortcodes\ShortcodeServiceProvider::class,
 	],
 
 	/**
